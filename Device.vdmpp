@@ -1,0 +1,22 @@
+class Device
+types
+	public vehiclePlate = seq1 of char;
+	public vehicleClass = seq1 of char;
+	public nif = seq1 of char;
+	
+	public numberCard = seq1 of char;
+	public Status = <Active> | <Deactivated>;
+	
+	
+	
+values
+-- TODO Define values here
+instance variables
+-- TODO Define instance variables here
+operations
+-- TODO Define operations here
+functions
+-- TODO Define functiones here
+traces
+-- TODO Define Combinatorial Test Traces here
+end Device
