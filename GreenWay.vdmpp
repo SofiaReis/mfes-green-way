@@ -1,12 +1,19 @@
 class GreenWay
 types
 		public devices = set of Device;
+		public services = set of ServiceProvider;
+		public nDevices = nat;
+		
 values
 -- TODO Define values here
 instance variables
--- TODO Define instance variables here
+	public devices : devices := {};
+	public services : services := {};
+	
 operations
--- TODO Define operations here
+	public GreenWay : () ==> GreenWay
+	GreenWay() == (
+		return self);
 functions
 -- TODO Define functiones here
 traces

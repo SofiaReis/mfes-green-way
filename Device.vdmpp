@@ -1,20 +1,28 @@
 class Device
 types
-	public vehiclePlate = seq1 of char;
-	public vehicleClass = seq1 of char;
-	public nif = seq1 of char;
-	
-	public numberCard = seq1 of char;
-	public Status = <Active> | <Deactivated>;
-	
-	
-	
+	public VecPlate = seq1 of char;
+	public VecClass = seq1 of char;
+	public Nif = seq1 of char;
+	public NumCard = seq1 of char;
 values
 -- TODO Define values here
 instance variables
--- TODO Define instance variables here
+	public plate: VecPlate;
+	public vclass: VecClass;
+	
+	public payments: map Month to Value := {"Jan"|->0,"Feb"|->0,"Mar"|->0, 
+																					"Apr"|->0,"May"|->0,"June"|->0,
+																				 "July"|->0,"Aug"|->0,"Sep"|->0,
+																				 "Oct"|->0,"Nov"|->0,"Dec"|->0};
+
 operations
--- TODO Define operations here
+	public Device: VecPlate * VecClass ==> Device
+	Device(vp, vc) == (
+			plate := vp;
+			vclass := vc;
+			return self
+			
+	);
 functions
 -- TODO Define functiones here
 traces
