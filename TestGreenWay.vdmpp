@@ -6,6 +6,9 @@ values
 instance variables
 		public gw : GreenWay := new GreenWay();
 		
+		
+		
+		
 operations
 -- TODO Define operations here
 functions

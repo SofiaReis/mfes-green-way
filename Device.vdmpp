@@ -1,28 +1,46 @@
 class Device
 types
-	public VecPlate = seq1 of char;
-	public VecClass = seq1 of char;
-	public Nif = seq1 of char;
+	public vecPlate = seq1 of char;
+	public Status = <Able> | <Disable>;
 	public NumCard = seq1 of char;
+	public monthTopay = seq1 of char;
+	public bill = rat;
 values
 -- TODO Define values here
 instance variables
-	public plate: VecPlate;
-	public vclass: VecClass;
-	
-	public payments: map Month to Value := {"Jan"|->0,"Feb"|->0,"Mar"|->0, 
-																					"Apr"|->0,"May"|->0,"June"|->0,
-																				 "July"|->0,"Aug"|->0,"Sep"|->0,
-																				 "Oct"|->0,"Nov"|->0,"Dec"|->0};
+	public plate: vecPlate;
+	public cardN: NumCard;
+	public status: Status := <Disable>;
+	public monthBill: map monthTopay to bill := {"January"|->0,"February"|->0,
+																					"March"|->0, "April"|->0,"May"|->0,
+																					"June"|->0,"July"|->0,"August"|->0,
+																					"September"|->0, "October"|->0,"November"|->0,
+																					"December"|->0};
 
 operations
-	public Device: VecPlate * VecClass ==> Device
-	Device(vp, vc) == (
+
+	-- Device Constructor
+	public Device: vecPlate * NumCard  ==> Device
+	Device(vp, nc) == (
 			plate := vp;
-			vclass := vc;
-			return self
-			
+			cardN := nc;
+			return self		
 	);
+	
+	-- Set Device Status, when registed on green way, for example
+	public setStatus: Status ==> ()
+	setStatus(stat) ==
+			status := stat;
+	
+	-- add payment of a certain month
+	public newMonthPayment: monthTopay * bill ==> ()
+	newMonthPayment(m,b) ==
+	(
+		monthBill(m) := monthBill(m) + b;	
+	);
+	
+	
+	
 functions
 -- TODO Define functiones here
 traces

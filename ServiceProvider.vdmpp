@@ -1,14 +1,21 @@
-class Service
+class ServiceProvider
 types
-		public hasProtocol = nat;
+	public Month = seq1 of char;
+	public Type = <HighWay> | <ParkingLot> | <Fuel> | <Ferries> | <McDrive> | <None>;
+	public totalBill  = rat;
 values
 -- TODO Define values here
 instance variables
--- TODO Define instance variables here
-operations
--- TODO Define operations here
+	public type : Type := <None>;
+operations	
+
+		public ServiceProvider: Type ==> ServiceProvider
+		ServiceProvider(t) == (
+			type := t;
+		);
+	
 functions
 -- TODO Define functiones here
 traces
 -- TODO Define Combinatorial Test Traces here
-end Service
+end ServiceProvider

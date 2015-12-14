@@ -1,0 +1,42 @@
+class Invoice
+types
+	public ReadPoints = set of ReadPoint;
+	public rpCount = nat;
+	public Month = int;
+	public totalMonth = real;
+values
+-- TODO Define values here
+instance variables
+	static public passages : ReadPoints := {};
+	public passagesCount : rpCount := card passages;
+	public month : Month;
+	public total : totalMonth;
+operations
+
+	-- Invoice Constructor
+	public Invoice: Month  ==> Invoice
+	Invoice(m) ==
+	(
+		month := m;
+	);
+	
+	-- Registo de nova passagem
+	public newPassage: ReadPoint ==> ()
+	newPassage(rp) == (
+		if rp.date.month <> month then(
+				passages := {rp} union passages;
+				passagesCount := passagesCount + 1;
+				total := rp.quota + total;
+				IO`println("New Passage registed!");
+		)
+		else (
+				IO`println("This facture is from another month.");
+		)
+	)
+	post(passagesCount = card passages);
+	
+functions
+-- TODO Define functiones here
+traces
+-- TODO Define Combinatorial Test Traces here
+end Invoice

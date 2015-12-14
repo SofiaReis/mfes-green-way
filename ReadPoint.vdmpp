@@ -1,0 +1,27 @@
+class ReadPoint
+types
+	public Quota = real;
+	
+values
+-- TODO Define values here
+instance variables
+public quota : Quota;
+	public service : ServiceProvider;
+	public device : Device;
+	public date : Date;
+operations	
+	
+	public ReadPoint: ServiceProvider * Quota * Device * Date  ==> ReadPoint
+	ReadPoint(s,q, d, dat) ==
+	(
+		service := s;
+		quota := q;
+		device := d;
+		date := dat;
+		return self;
+	);
+functions
+-- TODO Define functiones here
+traces
+-- TODO Define Combinatorial Test Traces here
+end ReadPoint

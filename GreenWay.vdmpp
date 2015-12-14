@@ -1,19 +1,46 @@
 class GreenWay
 types
-		public devices = set of Device;
-		public services = set of ServiceProvider;
-		public nDevices = nat;
+		public gwDevices = set of Device;
+		public gwServices = set of ServiceProvider;
+		public devCount = nat;
+		public sevCount = nat;
+		public money = rat;
+		public month = seq1 of char;
 		
 values
 -- TODO Define values here
 instance variables
-	public devices : devices := {};
-	public services : services := {};
-	
+	static public gwdevices : gwDevices := {};
+	static public gwservices : gwServices := {};
+	public devicesCount : devCount := card gwdevices;
+	public servicesCount : sevCount := card gwservices;
 operations
+
+	-- GreenWay Constructor
 	public GreenWay : () ==> GreenWay
 	GreenWay() == (
 		return self);
+	
+	-- Regist device on green way
+	public newDevice: Device ==> ()
+	newDevice(device) == (
+		gwdevices := {device} union gwdevices;
+		devicesCount := devicesCount + 1;
+		device.setStatus(<Able>);
+		IO`println("New device registed!");
+	)
+	post(devicesCount = card gwdevices);
+	
+	-- Regist service on green way
+	public newServiceProvider: ServiceProvider ==> ()
+	newServiceProvider(service) == (
+		gwservices := {service} union gwservices;
+		servicesCount := servicesCount + 1;
+		IO`println("New service registed!");
+	)
+	post(servicesCount = card gwservices);
+	
+	
 functions
 -- TODO Define functiones here
 traces

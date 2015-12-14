@@ -1,0 +1,44 @@
+class Date
+types
+		public Day = nat1;
+		public Month = nat1;
+		public Year = int;
+		public Hour = int;
+		public Minutes = int;
+		public Seconds = int;
+values
+-- TODO Define values here
+instance variables
+		public day : Day;
+		public month : Month;
+		public year : Year;
+		public hour : Hour;
+		public minutes : Minutes;
+		public seconds : Seconds;
+		
+	 inv day <= 31 and
+			 month <= 12 and
+ 				if month in set {4, 6, 9, 11}
+ 				then day <= 30
+ 				else (month = 2) => (day <= 29);
+ 				
+ 		inv hour < 24 and
+ 			minutes < 60 and
+ 			seconds < 60;
+ 				
+operations
+			public Date : Day * Month * Year * Hour * Minutes * Seconds ==> Date
+			Date(d,m,y,h,min,sec) == (
+			day := d;
+			month := m;
+			year := y;
+			hour := h;
+			minutes := min;
+			seconds := sec;
+		return self
+		);
+functions
+-- TODO Define functiones here
+traces
+-- TODO Define Combinatorial Test Traces here
+end Date
