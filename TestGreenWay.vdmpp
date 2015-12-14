@@ -4,13 +4,50 @@ types
 values
 -- TODO Define values here
 instance variables
-		public gw : GreenWay := new GreenWay();
+		public gw : GreenWay;
+		public d1 : Device;
+		public d2 : Device;
+		public dt1 : Date;
+		public dt2 : Date;
+		public dt3 : Date;
+		public dt4 : Date;
+		
 		
 		
 		
 		
 operations
--- TODO Define operations here
+		initializeObjects() == (
+				gw := new GreenWay();
+				d1 := new Device("00-FB-34",109872890, 1000);
+				d2 := new Device("30-MB-70",104637829, 2500);
+				
+				dt1 := new Date(2,4,2015,1,54,23);
+				dt2 := new Date(5,4,2015,5,30,20);
+				dt3 := new Date(5,12,2015,5,30,20);
+				dt4 := new Date(2,12,2015,1,54,23);
+		);
+		
+		deviceRegist() == (
+		IO`println("---Test : Create Device ---");
+		
+		gw.newDevice(d1);
+		assertTrue(gw.devicesCount = 1);
+		gw.newDevice(d2);
+		assertTrue(gw.devicesCount = 2);
+   	IO`println(" ");
+  );
+		
+		
+		public Run : () ==> ()
+			Run() == (
+					
+					initializeObjects();
+					deviceRegist();
+					
+			
+			);
+		
 functions
 -- TODO Define functiones here
 traces

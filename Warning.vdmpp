@@ -1,0 +1,18 @@
+class Warning
+types
+		public Type = seq1 of char;
+values
+-- TODO Define values here
+instance variables
+		public type : Type;
+operations
+		public Warning: Type  ==> Warning
+	Warning(t) == (
+			type := t;
+			return self		
+	);
+functions
+-- TODO Define functiones here
+traces
+-- TODO Define Combinatorial Test Traces here
+end Warning

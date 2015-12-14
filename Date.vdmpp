@@ -27,6 +27,7 @@ instance variables
  			seconds < 60;
  				
 operations
+			-- Date Constructor
 			public Date : Day * Month * Year * Hour * Minutes * Seconds ==> Date
 			Date(d,m,y,h,min,sec) == (
 			day := d;

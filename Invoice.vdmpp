@@ -11,19 +11,21 @@ instance variables
 	public passagesCount : rpCount := card passages;
 	public month : Month;
 	public total : totalMonth;
+	public device : Device;
 operations
 
 	-- Invoice Constructor
-	public Invoice: Month  ==> Invoice
-	Invoice(m) ==
+	public Invoice: Month * Device  ==> Invoice
+	Invoice(m, d) ==
 	(
 		month := m;
+		device := d;
 	);
 	
 	-- Registo de nova passagem
 	public newPassage: ReadPoint ==> ()
 	newPassage(rp) == (
-		if rp.date.month <> month then(
+		if rp.date.month = month then(
 				passages := {rp} union passages;
 				passagesCount := passagesCount + 1;
 				total := rp.quota + total;
@@ -34,6 +36,15 @@ operations
 		)
 	)
 	post(passagesCount = card passages);
+	
+	-- addDeviceMonthPayment
+	public payment: Month * totalMonth ==> ()
+	payment(m, t) == (
+		device.newMonthPayment(m,t);
+		IO`println("Your total Payment of this month!");
+	)
+	
+	
 	
 functions
 -- TODO Define functiones here

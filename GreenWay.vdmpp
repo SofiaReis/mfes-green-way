@@ -4,8 +4,8 @@ types
 		public gwServices = set of ServiceProvider;
 		public devCount = nat;
 		public sevCount = nat;
-		public money = rat;
-		public month = seq1 of char;
+		public totalMoney = real;
+		public Month = int;
 		
 values
 -- TODO Define values here
@@ -14,6 +14,7 @@ instance variables
 	static public gwservices : gwServices := {};
 	public devicesCount : devCount := card gwdevices;
 	public servicesCount : sevCount := card gwservices;
+	public total : totalMoney;
 operations
 
 	-- GreenWay Constructor
@@ -39,6 +40,15 @@ operations
 		IO`println("New service registed!");
 	)
 	post(servicesCount = card gwservices);
+	
+	public recPayment: Device * Month ==> ()
+	recPayment(d,m) == (
+			if(d.moneyDep - d.monthBill(m) < 0) then d.setStatus(<Disable>)
+			else(
+					total := total + d.monthBill(m);
+					d.setMonthBill(m,0);
+					d.setStatus(<Able>);))
+				pre(d in set gwdevices);
 	
 	
 functions

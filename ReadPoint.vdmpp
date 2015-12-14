@@ -1,25 +1,68 @@
 class ReadPoint
 types
 	public Quota = real;
+	public X = real;
+	public Y = real;
+	public warnType = seq1 of char;
+	public Plate = seq1 of char;
 	
 values
 -- TODO Define values here
 instance variables
-public quota : Quota;
+	public quota : Quota;
 	public service : ServiceProvider;
 	public device : Device;
 	public date : Date;
+	public xr : X;
+	public yr : Y;
+	public w1 : Warning;
+	public plate : Plate;
+	
+	
 operations	
 	
-	public ReadPoint: ServiceProvider * Quota * Device * Date  ==> ReadPoint
-	ReadPoint(s,q, d, dat) ==
+	public ReadPoint: ServiceProvider * Quota * Device * Date * X * Y * Plate ==> ReadPoint
+	ReadPoint(s,q, d, dat,x,y, p) ==
 	(
 		service := s;
 		quota := q;
 		device := d;
 		date := dat;
-		return self;
+		xr := x;
+		yr := y;
+		plate := p;
+		return self;		
 	);
+	
+		public setQuota: Quota ==> ()
+	setQuota(q) ==
+			quota := q;
+			
+	
+	public verifyDevice: Device ==> ()
+	verifyDevice(d) == (
+				if d.status = <Disable> or (d not in set GreenWay`gwdevices)
+				then(
+							IO`println("Device disabled using services");
+							w1 := new Warning("Device disabled using services");
+							d.newWarning(w1);	
+				)
+				else if service.xs <> xr and service.ys <> yr 
+				then(
+						IO`println("The service Provider is not in the same place as the read point");
+							w1 := new Warning("The service Provider is not in the same place as the read point");
+							d.newWarning(w1);	
+				)
+				else if d.plate <> plate
+				then(
+						IO`println("Device plate different than read plate");
+							w1 := new Warning("Device plate different than read plate");
+							d.newWarning(w1);	
+				)
+					
+	)
+	pre(service in set GreenWay`gwservices);
+	
 functions
 -- TODO Define functiones here
 traces
